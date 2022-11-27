@@ -1,7 +1,7 @@
 package com.pzz.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.pzz.domain.User;
+import com.pzz.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
