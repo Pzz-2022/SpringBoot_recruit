@@ -3,6 +3,8 @@ package com.pzz.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.util.List;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -36,5 +38,8 @@ public class Classify implements Serializable {
      */
     private String name;
 
-
+    /**
+     * 子分类
+     */
+    private List<Classify> children;
 }
