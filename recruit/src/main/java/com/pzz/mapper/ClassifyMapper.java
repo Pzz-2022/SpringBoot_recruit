@@ -1,6 +1,6 @@
 package com.pzz.mapper;
 
-import com.pzz.pojo.Classify3;
+import com.pzz.pojo.Classify;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author 彭政
  * @since 2022-11-27
  */
-public interface Classify3Mapper extends BaseMapper<Classify3> {
+public interface ClassifyMapper extends BaseMapper<Classify> {
 
 }

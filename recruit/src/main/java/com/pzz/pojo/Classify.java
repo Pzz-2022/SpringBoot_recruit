@@ -16,23 +16,23 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class Classify2 implements Serializable {
+public class Classify implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 二级分类ID
+     * 三级分类的ID
      */
     @TableId(value = "pk_id", type = IdType.AUTO)
     private Integer pkId;
 
     /**
-     * 从属一级分类的ID
+     * 从属二级分类的ID
      */
     private Integer parentId;
 
     /**
-     * 二级分类的名字
+     * 三级分类的名字
      */
     private String name;
 

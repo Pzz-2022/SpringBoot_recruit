@@ -1,6 +1,6 @@
 package com.pzz.service;
 
-import com.pzz.pojo.Classify2;
+import com.pzz.pojo.Classify;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author 彭政
  * @since 2022-11-27
  */
-public interface IClassify2Service extends IService<Classify2> {
+public interface IClassifyService extends IService<Classify> {
 
 }
