@@ -12,5 +12,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-11-27
  */
 public interface IUserService extends IService<User> {
+    String applyRegister(User user);
 
+    User getByPhone(Long phone);
 }

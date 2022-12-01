@@ -26,7 +26,7 @@ public class test {
         globalConfig.setOutputDir(System.getProperty("user.dir")+"/src/main/java");    //设置代码生成位置
         globalConfig.setOpen(false);    //设置生成完毕后是否打开生成代码所在的目录
         globalConfig.setAuthor("彭政");    //设置作者
-        globalConfig.setFileOverride(true);     //设置是否覆盖原始生成的文件
+        globalConfig.setFileOverride(false);     //设置是否覆盖原始生成的文件
         globalConfig.setMapperName("%sMapper");    //设置数据层接口名，%s为占位符，指代模块名称
         globalConfig.setIdType(IdType.ASSIGN_ID);   //设置Id生成策略
         autoGenerator.setGlobalConfig(globalConfig);

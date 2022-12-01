@@ -86,12 +86,12 @@ public class Recruit implements Serializable {
     /**
      * 发布招聘时间
      */
-    private LocalDateTime timeStart;
+    private String timeStart;
 
     /**
      * 报名结束时间
      */
-    private LocalDateTime timeEnd;
+    private String timeEnd;
 
     /**
      * 招聘状态
@@ -101,7 +101,7 @@ public class Recruit implements Serializable {
     /**
      * 招聘创建时间
      */
-    private LocalDateTime timeCreate;
+    private String timeCreate;
 
     /**
      * 平均反馈时长
@@ -111,7 +111,7 @@ public class Recruit implements Serializable {
     /**
      * 最近一次修改时间
      */
-    private LocalDateTime timeChange;
+    private String timeChange;
 
     /**
      * 是否删除

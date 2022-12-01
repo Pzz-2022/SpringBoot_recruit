@@ -66,7 +66,7 @@ public class User implements Serializable {
     /**
      * 用户生日
      */
-    private LocalDate birthday;
+    private String birthday;
 
     /**
      * 用户是否为在校生（0为非在校生，有数字为毕业年份）
@@ -106,7 +106,7 @@ public class User implements Serializable {
     /**
      * 注册时间
      */
-    private LocalDateTime timeCreate;
+    private String createTime;
 
     /**
      * 申请职位的数量

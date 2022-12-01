@@ -40,7 +40,7 @@ public class RecruitUser implements Serializable {
     /**
      * 申请时间
      */
-    private LocalDateTime time;
+    private String time;
 
     /**
      * 招聘人给的评分的平均分

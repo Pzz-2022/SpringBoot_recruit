@@ -1,3 +1,6 @@
+server:
+  port: 8088
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -5,8 +8,28 @@ spring:
     url: jdbc:mysql://localhost:3306/recruit
     username: root
     password: pz020525
+  servlet:
+    multipart:
+      max-file-size: 10MB # 单个文件上传的最大值
+      max-request-size: 10MB # 上传文件的最大值
+  web:
+    resources:
+      static-locations: file:D:\Software\FileRecv\Recruit
+  mvc:
+    # 项目静态资源路径,可以不写默认为/**
+    static-path-pattern: /static/**
+
 
 #    开启mp的日志（输出到控制台）
 #mybatis-plus:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #告知映射文件的位置
+  mapper-locations: classpath*:/mapper/*.xml
+  #  给POJO类起别名
+  type-aliases-package: com/pzz/pojo

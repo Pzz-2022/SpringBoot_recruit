@@ -2,6 +2,7 @@ package com.pzz.mapper;
 
 import com.pzz.pojo.Classify;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * <p>

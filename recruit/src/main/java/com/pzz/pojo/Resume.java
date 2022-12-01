@@ -46,7 +46,7 @@ public class Resume implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime createdTime;
+    private String createdTime;
 
     /**
      * 1为已删除

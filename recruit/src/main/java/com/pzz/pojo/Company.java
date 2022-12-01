@@ -52,7 +52,7 @@ public class Company implements Serializable {
     /**
      * 公司人数
      */
-    private Integer count;
+    private String count;
 
     /**
      * 法人姓名
@@ -87,7 +87,7 @@ public class Company implements Serializable {
     /**
      * 创建时间
      */
-    private LocalDateTime timeCreate;
+    private String timeCreate;
 
     /**
      * 是否删除（有违规行为可封禁）
