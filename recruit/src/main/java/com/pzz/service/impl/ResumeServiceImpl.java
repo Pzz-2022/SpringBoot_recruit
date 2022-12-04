@@ -1,7 +1,7 @@
 package com.pzz.service.impl;
 
-import com.pzz.pojo.Resume;
 import com.pzz.mapper.ResumeMapper;
+import com.pzz.pojo.Resume;
 import com.pzz.service.IResumeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;

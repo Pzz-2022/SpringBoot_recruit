@@ -2,11 +2,11 @@ package com.pzz.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -49,6 +49,11 @@ public class Recruit implements Serializable {
     private Integer classifyId;
 
     /**
+     * 分类名字
+     */
+    private String classifyName;
+
+    /**
      * 实习/应届/社招
      */
     private String type;
@@ -62,6 +67,16 @@ public class Recruit implements Serializable {
      * 招聘城市
      */
     private String city;
+
+    /**
+     * 经验要求（在校生、应届生、1年以内、1-3年、3-5年、5-10年、10年以上）
+     */
+    private String experience;
+
+    /**
+     * 学历要求（1为初中及以下2为中专3为高中4为大专5为本科6为硕士7为博士）
+     */
+    private Integer education;
 
     /**
      * 招聘要求
@@ -94,7 +109,7 @@ public class Recruit implements Serializable {
     private String timeEnd;
 
     /**
-     * 招聘状态
+     * 招聘状态(0结束 还剩下几个名额)
      */
     private Integer status;
 
@@ -114,10 +129,8 @@ public class Recruit implements Serializable {
     private String timeChange;
 
     /**
-     * 是否删除
+     * 是否删除（1为删除）
      */
     @TableLogic
     private Integer isDeleted;
-
-
 }

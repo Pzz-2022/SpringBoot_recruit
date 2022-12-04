@@ -2,9 +2,10 @@ package com.pzz.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -12,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

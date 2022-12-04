@@ -39,5 +39,23 @@ public class RecruitController {
 
         return JsonResult.ok("recruitPage", recruitPage);
     }
+
+    @GetMapping("/searchList")
+    public JsonResult getSearchList(int page, int pageSize, String q, String city, String experience, String education, String salary) {
+        Page<Recruit> searchList = recruitService.getSearchList(page, pageSize, q, city, experience, education, salary);
+
+        return JsonResult.ok("searchList", searchList);
+    }
+
+    @GetMapping("/{pkId}")
+    public JsonResult getOne(@PathVariable int pkId) {
+        Recruit recruit = recruitService.getById(pkId);
+
+        recruit.setDescription(recruit.getDescription()
+                                .replaceAll(" ","&nbsp;")
+                                .replaceAll("\r","<br/>"));
+
+        return JsonResult.ok("recruit", recruit);
+    }
 }
 

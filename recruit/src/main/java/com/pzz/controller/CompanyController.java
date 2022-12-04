@@ -4,14 +4,10 @@ package com.pzz.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.pojo.Company;
-import com.pzz.pojo.Recruit;
 import com.pzz.service.ICompanyService;
 import com.pzz.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -41,6 +37,20 @@ public class CompanyController {
         IPage<Company> companyList = companyService.getPage(page, pageSize);
 
         return JsonResult.ok("companyList", companyList);
+    }
+
+    @GetMapping("/{pkId}")
+    public JsonResult getOneById(@PathVariable int pkId) {
+        Company company = companyService.getBaseMapper().selectById(pkId);
+
+        return JsonResult.ok("company", company);
+    }
+
+    @GetMapping("/searchPage")
+    public JsonResult getSearchPage(int page, int pageSize, String q, String address, String count, String type) {
+        Page<Company> searchPage = companyService.getSearchPage(page, pageSize, q, address, count, type);
+
+        return JsonResult.ok("searchPage", searchPage);
     }
 }
 

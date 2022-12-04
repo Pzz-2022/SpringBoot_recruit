@@ -1,8 +1,7 @@
 package com.pzz.mapper;
 
-import com.pzz.pojo.Company;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.pzz.pojo.Company;
 
 /**
  * <p>
@@ -13,5 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @since 2022-11-27
  */
 public interface CompanyMapper extends BaseMapper<Company> {
+
 
 }

@@ -1,7 +1,6 @@
 package com.pzz.service.impl;
 
 import com.pzz.pojo.Classify;
-import com.pzz.mapper.ClassifyMapper;
 import com.pzz.service.IClassifyService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -15,6 +14,6 @@ import org.springframework.stereotype.Service;
  * @since 2022-11-27
  */
 @Service
-public class ClassifyServiceImpl extends ServiceImpl<ClassifyMapper, Classify> implements IClassifyService {
+public class ClassifyServiceImpl implements IClassifyService {
 
 }

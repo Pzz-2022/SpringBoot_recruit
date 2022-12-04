@@ -1,7 +1,7 @@
 package com.pzz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.pzz.pojo.Keyword;
+import com.pzz.pojo.Classify2;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.pzz.pojo.Keyword;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-02
  */
-public interface IKeywordService extends IService<Keyword> {
+public interface IClassify2Service extends IService<Classify2> {
 
 }

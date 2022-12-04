@@ -1,13 +1,13 @@
 package com.pzz.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import java.time.Year;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableLogic;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.time.Year;
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-02
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -63,11 +63,6 @@ public class Company implements Serializable {
      * 注册地址
      */
     private String address;
-
-    /**
-     * 官网链接
-     */
-    private String owe;
 
     /**
      * 公司描述

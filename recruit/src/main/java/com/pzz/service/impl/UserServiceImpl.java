@@ -1,8 +1,8 @@
 package com.pzz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.pzz.pojo.User;
 import com.pzz.mapper.UserMapper;
+import com.pzz.pojo.User;
 import com.pzz.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pzz.utils.DateUtil;
@@ -41,7 +41,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         lqw.eq(User::getPhone,phone);
 
         User user = baseMapper.selectOne(lqw);
-        user.setPassword("");
+        if (user != null)
+            user.setPassword("");
 
         return user;
     }

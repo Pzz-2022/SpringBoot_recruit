@@ -2,4 +2,63 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pzz.mapper.RecruitMapper">
 
+    <select id="selectSearchList" resultType="com.pzz.pojo.Recruit">
+        SELECT pk_id,
+               company_id,
+               user_id,
+               theme,
+               classify_id,
+               classify_name,
+               type,
+               num,
+               city,
+               experience,
+               education,
+               description,
+               salary_start,
+               salary_end,
+               salary_count,
+               time_start,
+               time_end,
+               status,
+               time_create,
+               time_feedback,
+               time_change,
+               is_deleted
+        FROM recruit
+        WHERE theme like CONCAT('%', #{q}, '%')
+          AND city like CONCAT('%', #{city}, '%')
+        <if test="experience != ''">
+          AND experience = #{experience}
+        </if>
+        <if test="education != ''">
+            AND education = #{education}
+        </if>
+          AND (
+                (salary_start &lt;= #{salaryStart} AND salary_end > #{salaryEnd})
+                OR (salary_end >= #{salaryStart} AND salary_end &lt; #{salaryEnd})
+               )
+        LIMIT #{index}, #{pageSize};
+    </select>
+
+    <select id="selectSearchListTotal" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM recruit
+        WHERE theme like CONCAT('%', #{q}, '%')
+          AND city like CONCAT('%', #{city}, '%')
+        <if test="experience != ''">
+            AND experience = #{experience}
+        </if>
+        <if test="education != ''">
+            AND education = #{education}
+        </if>
+          AND (
+                (salary_start &lt;= #{salaryStart} AND salary_end > #{salaryEnd})
+                OR (salary_end >= #{salaryStart} AND salary_end &lt; #{salaryEnd})
+            );
+    </select>
+
+    <select id="selectAll" resultType="com.pzz.pojo.Recruit">
+        SELECT * FROM recruit;
+    </select>
 </mapper>

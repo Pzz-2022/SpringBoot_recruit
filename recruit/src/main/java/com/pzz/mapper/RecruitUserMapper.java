@@ -1,8 +1,7 @@
 package com.pzz.mapper;
 
-import com.pzz.pojo.RecruitUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.pzz.pojo.RecruitUser;
 
 /**
  * <p>

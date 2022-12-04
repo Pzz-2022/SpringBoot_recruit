@@ -1,7 +1,7 @@
 package com.pzz.service;
 
-import com.pzz.pojo.RecruitUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.pzz.pojo.RecruitUser;
 
 /**
  * <p>

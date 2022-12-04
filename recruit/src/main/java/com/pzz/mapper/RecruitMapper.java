@@ -1,8 +1,9 @@
 package com.pzz.mapper;
 
-import com.pzz.pojo.Recruit;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Mapper;
+import com.pzz.pojo.Recruit;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,4 +15,9 @@ import org.apache.ibatis.annotations.Mapper;
  */
 public interface RecruitMapper extends BaseMapper<Recruit> {
 
+    List<Recruit> selectSearchList(int index, int pageSize, String q, String city, String experience, String education, int salaryStart, int salaryEnd);
+
+    int selectSearchListTotal(String q, String city, String experience, String education, int salaryStart, int salaryEnd);
+
+    List<Recruit> selectAll();
 }

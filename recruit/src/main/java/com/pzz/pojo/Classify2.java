@@ -17,40 +17,25 @@ import java.io.Serializable;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RecruitUser implements Serializable {
+public class Classify2 implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 唯一标识ID
+     * 二级分类ID
      */
     @TableId(value = "pk_id", type = IdType.AUTO)
     private Integer pkId;
 
     /**
-     * 申请人
+     * 从属一级分类的ID
      */
-    private Integer userId;
+    private Integer parentId;
 
     /**
-     * 申请招聘的ID
+     * 二级分类的名字
      */
-    private Integer recruitId;
-
-    /**
-     * 申请时间
-     */
-    private String time;
-
-    /**
-     * 招聘人给的评分的平均分
-     */
-    private Double avgScore;
-
-    /**
-     * 招聘状态（0未录用，1筛简历，2笔试，3面试，4录用）
-     */
-    private Integer status;
+    private String name;
 
 
 }

@@ -1,7 +1,7 @@
 package com.pzz.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.pzz.pojo.User;
+import com.pzz.pojo.Classify3;
 
 /**
  * <p>
@@ -9,8 +9,8 @@ import com.pzz.pojo.User;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-02
  */
-public interface UserMapper extends BaseMapper<User> {
+public interface Classify3Mapper extends BaseMapper<Classify3> {
 
 }

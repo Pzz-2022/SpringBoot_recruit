@@ -1,6 +1,7 @@
 package com.pzz;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.pzz.mapper.Classify1Mapper;
 import com.pzz.mapper.RecruitMapper;
 import com.pzz.mapper.UserMapper;
 import com.pzz.pojo.Recruit;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
+import java.util.Scanner;
 
 @SpringBootTest
 class RecruitApplicationTests {
@@ -27,6 +28,9 @@ class RecruitApplicationTests {
 
     @Autowired
     private RecruitMapper recruitMapper;
+
+    @Autowired
+    private Classify1Mapper classify1Mapper;
 
 
     @Test
@@ -52,4 +56,10 @@ class RecruitApplicationTests {
         System.out.println(recruitPage);
         System.out.println(recruitPage.getRecords());
     }
+
+    @Test
+    void testClass() {
+        System.out.println(recruitMapper.selectAll());
+    }
 }
+

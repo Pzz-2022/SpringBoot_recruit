@@ -3,7 +3,6 @@ package com.pzz.controller;
 
 import com.pzz.pojo.Keyword;
 import com.pzz.service.IKeywordService;
-import com.pzz.service.impl.KeywordServiceImpl;
 import com.pzz.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

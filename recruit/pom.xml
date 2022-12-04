@@ -64,6 +64,7 @@
             <version>2.3</version>
         </dependency>
 
+<!--    JSON    -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
@@ -94,6 +95,11 @@
             <version>[7.7.0, 7.10.99]</version>
         </dependency>
 
+        <!-- websocket -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
