@@ -25,7 +25,7 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     public IPage<Company> getPage(int page, int pageSize) {
         Page<Company> rowPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<Company> lqw = new LambdaQueryWrapper<>();
-        lqw.orderByDesc(Company::getJob);
+        lqw.orderByDesc(Company::getJobCount);
 
         return baseMapper.selectPage(rowPage, lqw);
     }

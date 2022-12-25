@@ -1,5 +1,6 @@
 package com.pzz.controller;
 
+import com.pzz.pojo.User;
 import com.pzz.service.IUserService;
 import com.pzz.utils.JsonResult;
 import com.pzz.utils.UploadUtil;
@@ -45,6 +46,22 @@ public class UploadImgController {
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.error("文件上传失败！");
+        }
+    }
+
+    @PostMapping("/head/{uid}")
+    public JsonResult uploadHead(MultipartFile file, @PathVariable Long uid) {
+        try {
+            String url = UploadUtil.uploadImg(file);
+            User user = new User();
+            user.setUid(uid);
+            user.setHeadPortrait(url);
+            userService.updateById(user);
+
+            return JsonResult.ok("url", url);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error();
         }
     }
 }

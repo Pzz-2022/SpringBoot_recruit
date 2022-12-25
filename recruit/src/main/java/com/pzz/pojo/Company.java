@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.Year;
 
 /**
@@ -15,7 +16,7 @@ import java.time.Year;
  * </p>
  *
  * @author 彭政
- * @since 2022-12-02
+ * @since 2022-12-05
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -50,7 +51,7 @@ public class Company implements Serializable {
     private String logo;
 
     /**
-     * 公司人数
+     * 公司人数（0-20人、20-99人、100-499人、500-999人、1000-9999人、10000人以上）
      */
     private String count;
 
@@ -60,7 +61,7 @@ public class Company implements Serializable {
     private String corporation;
 
     /**
-     * 注册地址
+     * 注册地址的城市
      */
     private String address;
 
@@ -70,14 +71,19 @@ public class Company implements Serializable {
     private String description;
 
     /**
+     * HR的数量
+     */
+    private Integer hrCount;
+
+    /**
      * 招聘的数量
      */
-    private Integer job;
+    private Integer jobCount;
 
     /**
      * 公司成立年份
      */
-    private Year year;
+    private String dateCreate;
 
     /**
      * 创建时间

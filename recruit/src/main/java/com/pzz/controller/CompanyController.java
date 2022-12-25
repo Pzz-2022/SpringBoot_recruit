@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author 彭政
@@ -29,28 +29,40 @@ public class CompanyController {
     private JsonResult getAll() {
         List<Company> companyList = companyService.getBaseMapper().selectList(null);
 
-        return JsonResult.ok("companyList", companyList);
+        if (companyList != null)
+            return JsonResult.ok("companyList", companyList);
+        else
+            return JsonResult.error("查询CompanyList失败！");
     }
 
     @GetMapping("/list")
     public JsonResult getPage(int page, int pageSize) {
         IPage<Company> companyList = companyService.getPage(page, pageSize);
 
-        return JsonResult.ok("companyList", companyList);
+        if (companyList != null)
+            return JsonResult.ok("companyList", companyList);
+        else
+            return JsonResult.error();
     }
 
     @GetMapping("/{pkId}")
     public JsonResult getOneById(@PathVariable int pkId) {
         Company company = companyService.getBaseMapper().selectById(pkId);
 
-        return JsonResult.ok("company", company);
+        if (company != null)
+            return JsonResult.ok("company", company);
+        else
+            return JsonResult.error("为查询到该公司！");
     }
 
     @GetMapping("/searchPage")
     public JsonResult getSearchPage(int page, int pageSize, String q, String address, String count, String type) {
         Page<Company> searchPage = companyService.getSearchPage(page, pageSize, q, address, count, type);
 
-        return JsonResult.ok("searchPage", searchPage);
+        if (searchPage != null)
+            return JsonResult.ok("searchPage", searchPage);
+        else
+            return JsonResult.error("查询SearchPage失败!");
     }
 }
 

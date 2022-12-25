@@ -35,10 +35,11 @@ public class UserController {
         LambdaQueryWrapper<User> lqw = new LambdaQueryWrapper<>();
         lqw.eq(User::getPhone, user.getPhone());
 
-        User result = userService.getOne(lqw);
+        User resultUser = userService.getOne(lqw);
 
-        if (result.getPassword().equals(user.getPassword())) {
-            String tokenStr = JwtUtil.createToken(user.getUid(), user.getName());
+        if (resultUser.getPassword().equals(user.getPassword())) {
+            String tokenStr = JwtUtil.createToken(resultUser.getUid(), resultUser.getName());
+
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("token", tokenStr);
 
@@ -90,5 +91,7 @@ public class UserController {
         User user = userService.getByPhone(phone);
         return JsonResult.ok("user", user);
     }
+
+
 }
 

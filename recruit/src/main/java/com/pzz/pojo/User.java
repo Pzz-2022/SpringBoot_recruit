@@ -89,7 +89,7 @@ public class User implements Serializable {
     private String specialty;
 
     /**
-     * 作为某个公司的负责人（0则无）
+     * 作为某个公司的负责人（0则无）(HR)
      */
     private Integer companyId;
 

@@ -6,7 +6,8 @@ import java.util.Date;
 import java.util.UUID;
 
 public class JwtUtil {
-    private static final String signature = "pz-2022";
+    private static final String SIGNATURE = "pz-2022";
+    private static final int TIME_Expiration = 1000 * 60 * 30;
 
     public static String createToken(Long uid, String name){
         JwtBuilder jwtBuilder = Jwts.builder();
@@ -17,10 +18,10 @@ public class JwtUtil {
                 // payload
                 .claim("uid", uid)
                 .claim("username", name)
-                .setExpiration(new Date(System.currentTimeMillis()+1000*5))
+                .setExpiration(new Date(System.currentTimeMillis() + TIME_Expiration))
                 .setId(UUID.randomUUID().toString())
                 // signature
-                .signWith(SignatureAlgorithm.HS256, signature)
+                .signWith(SignatureAlgorithm.HS256, SIGNATURE)
                 .compact();
         return jwtToken;
     }
@@ -30,7 +31,7 @@ public class JwtUtil {
         String uid = null;
         try {
             JwtParser jwtParser = Jwts.parser();
-            Jws<Claims> claimsJws = jwtParser.setSigningKey(signature).parseClaimsJws(token);
+            Jws<Claims> claimsJws = jwtParser.setSigningKey(SIGNATURE).parseClaimsJws(token);
             Claims claims = claimsJws.getBody();
             uid = (String) claims.get("uid");
 
@@ -39,4 +40,15 @@ public class JwtUtil {
             return false;
         }
     }
+
+    // 强行拿用户id
+    public static Integer parseTokenToGeyUid(String token){
+        Integer uid = null;
+        JwtParser jwtParser = Jwts.parser();
+        Jws<Claims> claimsJws = jwtParser.setSigningKey(SIGNATURE).parseClaimsJws(token);
+        Claims claims = claimsJws.getBody();
+        uid = (Integer) claims.get("uid");
+        return uid;
+    }
+
 }

@@ -2,8 +2,11 @@ package com.pzz.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.pzz.utils.DateUtil;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -17,6 +20,7 @@ import java.time.LocalDateTime;
  * @since 2022-12-04
  */
 @Data
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 public class RecordUserRecruit implements Serializable {
 
@@ -41,7 +45,12 @@ public class RecordUserRecruit implements Serializable {
     /**
      * 查看的时间
      */
-    private LocalDateTime createTime;
+    private String createTime;
 
 
+    public RecordUserRecruit(Integer uid, Integer recruitId) {
+        this.uid = uid;
+        this.recruitId = recruitId;
+        this.createTime = DateUtil.getDate2();
+    }
 }
