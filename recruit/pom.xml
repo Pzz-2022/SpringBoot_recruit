@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.pzz</groupId>
-    <artifactId>mybatisplus_01_quickstart</artifactId>
+    <artifactId>recruit</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <properties>
         <java.version>1.8</java.version>

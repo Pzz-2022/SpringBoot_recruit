@@ -13,7 +13,7 @@ import java.util.UUID;
 
 // 文件OSS上传
 public class UploadUtil {
-    //域名(开头需要https://，结尾要/)
+    // 域名(开头需要https://，结尾要/)
     public static final String ALI_DOMAIN = "https://springboot-recruit.oss-cn-guangzhou.aliyuncs.com/";
     private static final String path = "D:\\Software\\FileRecv\\Recruit\\";
     private static final String resultPath = "http://localhost:8088/static/";

@@ -86,8 +86,14 @@ public class JsonResult {
         return jsonResult;
     }
 
-    public JsonResult data(String key, Object value) {
+    // 给添加数据
+    public JsonResult addData(String key, Object value) {
         this.data.put(key, value);
         return this;
+    }
+
+    // 根据需要返回数据
+    public static JsonResult judge(Boolean flag) {
+        return flag ? ok() : error();
     }
 }

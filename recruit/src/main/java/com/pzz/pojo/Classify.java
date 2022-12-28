@@ -1,12 +1,11 @@
 package com.pzz.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
-import java.util.List;
-
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * <p>
@@ -14,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-27
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -23,23 +22,37 @@ public class Classify implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 分类的ID
+     * 分类ID
      */
-    @TableId(value = "pk_id", type = IdType.AUTO)
-    private Integer pkId;
+    @TableId(value = "cid", type = IdType.AUTO)
+    private Integer value;
 
     /**
-     * 从属父类的ID
+     * 分类层级
      */
-    private Integer parentId;
+    private Integer level;
 
     /**
-     * 分类的名字
+     * 父分类ID
      */
-    private String name;
+    private Integer parentCid;
+
+    /**
+     * 分类名称
+     */
+    @TableField("name")
+    private String label;
+
+    /**
+     * 是否删除(0为显示1为删除)
+     */
+    @TableLogic
+    private Integer isDeleted;
+
 
     /**
      * 子分类
      */
+    @TableField(exist = false)
     private List<Classify> children;
 }

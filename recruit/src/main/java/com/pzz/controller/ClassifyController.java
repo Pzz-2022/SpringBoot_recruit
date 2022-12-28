@@ -1,9 +1,13 @@
 package com.pzz.controller;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import com.pzz.pojo.Classify;
+import com.pzz.service.IClassifyService;
+import com.pzz.utils.JsonResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
 /**
  * <p>
@@ -11,11 +15,33 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-27
  */
 @RestController
 @RequestMapping("/classify")
 public class ClassifyController {
+    @Autowired
+    private IClassifyService classifyService;
 
+    @PostMapping
+    public JsonResult addOne(Classify classify) {
+        boolean b = classifyService.save(classify);
+
+        return JsonResult.judge(b);
+    }
+
+    @GetMapping
+    public JsonResult getAll() {
+        List<Classify> classifyList = classifyService.selectAll();
+
+        return JsonResult.ok("classifyList", classifyList);
+    }
+
+    @GetMapping("/{cid}")
+    private JsonResult getOne(@PathVariable Integer cid) {
+        Classify classify = classifyService.getById(cid);
+
+        return JsonResult.ok("classify", classify);
+    }
 }
 

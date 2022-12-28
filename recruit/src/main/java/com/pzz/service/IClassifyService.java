@@ -1,7 +1,9 @@
 package com.pzz.service;
 
-import com.pzz.pojo.Classify;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.pzz.pojo.Classify;
+
+import java.util.List;
 
 /**
  * <p>
@@ -9,8 +11,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author 彭政
- * @since 2022-11-27
+ * @since 2022-12-27
  */
-public interface IClassifyService {
+public interface IClassifyService extends IService<Classify> {
 
+    List<Classify> selectAll();
 }

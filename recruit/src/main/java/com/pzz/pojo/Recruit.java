@@ -89,7 +89,7 @@ public class Recruit implements Serializable {
     private Integer salaryStart;
 
     /**
-     * 薪资的右端点（0为面议）
+     * 薪资的右端点
      */
     private Integer salaryEnd;
 
