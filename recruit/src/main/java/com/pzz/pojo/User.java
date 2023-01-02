@@ -118,5 +118,7 @@ public class User implements Serializable {
      */
     private Integer accountIssue;
 
-
+    public User() {
+        this.headPortrait = "https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png";
+    }
 }

@@ -7,7 +7,10 @@ import java.util.UUID;
 
 public class JwtUtil {
     private static final String SIGNATURE = "pz-2022";
-    private static final int TIME_Expiration = 1000 * 60 * 30;
+    private static final long MIN_TIME = 1000L * 60;
+    private static final long HOUR_TIME = MIN_TIME * 60;
+    private static final long DAY_TIME = HOUR_TIME * 24;
+    private static final long TIME_Expiration = HOUR_TIME;
 
     public static String createToken(Long uid, String name){
         JwtBuilder jwtBuilder = Jwts.builder();
@@ -42,7 +45,7 @@ public class JwtUtil {
     }
 
     // 强行拿用户id
-    public static Integer parseTokenToGeyUid(String token){
+    public static Integer parseTokenToGetUid(String token){
         Integer uid = null;
         JwtParser jwtParser = Jwts.parser();
         Jws<Claims> claimsJws = jwtParser.setSigningKey(SIGNATURE).parseClaimsJws(token);

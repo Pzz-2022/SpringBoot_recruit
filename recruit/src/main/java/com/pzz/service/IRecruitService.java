@@ -16,5 +16,7 @@ public interface IRecruitService extends IService<Recruit> {
 
     Page<Recruit> getPage(int page, int pageSize);
 
+    Page<Recruit> getPage(int uid, int pageNow, int pageSize);
+
     Page<Recruit> getSearchList(int page, int pageSize, String q, String city, String experience, String educationStr, String salary);
 }

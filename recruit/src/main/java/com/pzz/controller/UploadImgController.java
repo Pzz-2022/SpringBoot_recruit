@@ -1,17 +1,17 @@
 package com.pzz.controller;
 
+import com.pzz.pojo.Resume;
 import com.pzz.pojo.User;
+import com.pzz.service.IResumeService;
 import com.pzz.service.IUserService;
 import com.pzz.utils.JsonResult;
+import com.pzz.utils.JwtUtil;
 import com.pzz.utils.UploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.system.ApplicationHome;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -29,10 +29,38 @@ public class UploadImgController {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    private IResumeService resumeService;
+
+    @PostMapping
+    public JsonResult uploadFile(MultipartFile file) {
+        try {
+            return JsonResult.ok("url", UploadUtil.upload(file));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @PostMapping("/resume")
+    public JsonResult uploadResume(MultipartFile file, Long uid) {
+        try {
+            String url = UploadUtil.upload(file);
+
+            String filename = file.getOriginalFilename();
+            resumeService.save(new Resume(uid, url, filename.substring(0, filename.lastIndexOf('.'))));
+
+            return JsonResult.ok("url", url);
+        } catch (Exception e) {
+            System.out.println("用户未登录或token超时.");
+            return JsonResult.error("用户未登录或token超时.");
+        }
+    }
+
     @PostMapping("/image")
     public JsonResult upload(MultipartFile file) {
         try {
-            return JsonResult.ok("url", UploadUtil.uploadImg(file));
+            return JsonResult.ok("url", UploadUtil.upload(file));
         } catch (Exception e) {
             e.printStackTrace();
             return JsonResult.error();
@@ -49,10 +77,11 @@ public class UploadImgController {
         }
     }
 
-    @PostMapping("/head/{uid}")
-    public JsonResult uploadHead(MultipartFile file, @PathVariable Long uid) {
+    @PostMapping("/head")
+    public JsonResult uploadHead(HttpServletRequest request, MultipartFile file) {
         try {
-            String url = UploadUtil.uploadImg(file);
+            String url = UploadUtil.upload(file);
+            Long uid = Long.valueOf(JwtUtil.parseTokenToGetUid(request.getHeader("token")));
             User user = new User();
             user.setUid(uid);
             user.setHeadPortrait(url);

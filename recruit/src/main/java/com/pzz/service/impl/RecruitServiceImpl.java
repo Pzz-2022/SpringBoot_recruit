@@ -1,5 +1,6 @@
 package com.pzz.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.mapper.RecruitMapper;
 import com.pzz.pojo.Recruit;
@@ -23,12 +24,23 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
 
     @Override
     public Page<Recruit> getPage(int page, int pageSize) {
-        //分页参数
+        // 分页参数
         Page<Recruit> rowPage = new Page(page, pageSize);
+        LambdaQueryWrapper<Recruit> lqw = new LambdaQueryWrapper<>();
+        lqw.apply("num > status");
 
-        Page<Recruit> recruitPage = baseMapper.selectPage(rowPage, null);
+        return baseMapper.selectPage(rowPage, lqw);
+    }
 
-        return recruitPage;
+    @Override
+    public Page<Recruit> getPage(int uid, int pageNow, int pageSize) {
+        // 分页、查询参数
+        Page<Recruit> rowPage = new Page(pageNow, pageSize);
+        LambdaQueryWrapper<Recruit> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Recruit::getUserId, uid);
+        lqw.apply("num > status");
+
+        return baseMapper.selectPage(rowPage, lqw);
     }
 
     @Override
@@ -48,7 +60,6 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
             } else if (split.length == 1) {
                 salaryStart = Integer.parseInt(split[0]);
             }
-
 
         recruitPage.setTotal(recruitMapper.selectSearchListTotal(q, city, experience, education, salaryStart, salaryEnd));
         recruitPage.setRecords(recruitMapper.selectSearchList((page - 1) * pageSize, pageSize, q, city, experience, education, salaryStart, salaryEnd));

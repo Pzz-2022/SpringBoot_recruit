@@ -5,7 +5,6 @@ import com.pzz.pojo.RecordUserRecruit;
 import com.pzz.pojo.Recruit;
 import com.pzz.service.IRecordUserRecruitService;
 import com.pzz.service.IRecruitService;
-import com.pzz.utils.DateUtil;
 import com.pzz.utils.JsonResult;
 import com.pzz.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +41,14 @@ public class RecruitController {
     public JsonResult getPage(int page, int pageSize) {
         Page<Recruit> recruitPage = recruitService.getPage(page, pageSize);
 
+        System.out.println(recruitPage);
+        return JsonResult.ok("recruitPage", recruitPage);
+    }
+
+    @GetMapping("/list/{hrId}")
+    public JsonResult getPage( @PathVariable int hrId, int pageNow, int pageSize) {
+        Page<Recruit> recruitPage = recruitService.getPage(hrId, pageNow, pageSize);
+
         return JsonResult.ok("recruitPage", recruitPage);
     }
 
@@ -49,6 +56,7 @@ public class RecruitController {
     public JsonResult getSearchList(int page, int pageSize, String q, String city, String experience, String education, String salary) {
         Page<Recruit> searchList = recruitService.getSearchList(page, pageSize, q, city, experience, education, salary);
 
+        System.out.println(searchList);
         return JsonResult.ok("searchList", searchList);
     }
 
@@ -65,7 +73,7 @@ public class RecruitController {
                 if (token == null || token.equals("")){
                     throw new Exception("该用户未登录。");
                 }
-                Integer uid = JwtUtil.parseTokenToGeyUid(token);
+                Integer uid = JwtUtil.parseTokenToGetUid(token);
                 recordUserRecruitService.save(new RecordUserRecruit(uid, recruit.getPkId()));
             } catch (Exception e) {
                 System.out.println("该用户未登录。");
@@ -75,6 +83,18 @@ public class RecruitController {
             recruit.setDescription(recruit.getDescription()
                     .replaceAll(" ","&nbsp;")
                     .replaceAll("\r","<br/>"));
+            return JsonResult.ok("recruit", recruit);
+        }
+        return JsonResult.error("为查询到招聘信息！");
+    }
+
+    @GetMapping("/search/{pkId}")
+    public JsonResult getSearchOne(@PathVariable int pkId) {
+        // 获取数据
+        Recruit recruit = recruitService.getById(pkId);
+        System.out.println(pkId);
+
+        if (recruit != null) {
             return JsonResult.ok("recruit", recruit);
         }
         return JsonResult.error("为查询到招聘信息！");
@@ -97,10 +117,21 @@ public class RecruitController {
 
     @PostMapping
     public JsonResult addOne(@RequestBody Recruit recruit) {
-        System.out.println();
-        System.out.println(recruit);
-        System.out.println();
         boolean b = recruitService.save(recruit);
+
+        return JsonResult.judge(b);
+    }
+
+    @DeleteMapping("/{id}")
+    public JsonResult deleteOne(@PathVariable int id) {
+        boolean b = recruitService.removeById(id);
+
+        return JsonResult.judge(b);
+    }
+
+    @PatchMapping
+    private JsonResult updateOne(@RequestBody Recruit recruit) {
+        boolean b = recruitService.updateById(recruit);
 
         return JsonResult.judge(b);
     }

@@ -42,7 +42,7 @@ public class HrInfoController {
         System.out.println(hrInfo);
         boolean b = hrInfoService.updateById(hrInfo.get("hrInfo"));
 
-        return b ? JsonResult.ok() : JsonResult.error("修改失败!");
+        return JsonResult.judge(b);
     }
 }
 

@@ -1,7 +1,10 @@
 package com.pzz.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.pzz.pojo.Recruit;
 import com.pzz.pojo.RecruitUser;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,13 @@ import com.pzz.pojo.RecruitUser;
  */
 public interface IRecruitUserService extends IService<RecruitUser> {
 
+    List<Integer> getApplyChange(int rid);
+
+    int getApplyNum(int rid);
+
+    RecruitUser selectOne(Integer uid, Integer rid);
+
+    List<RecruitUser> selectByHrId(Integer hrId, Integer pageNow, Integer pageSize);
+
+    Integer selectByHrIdTotal(Integer hrId);
 }

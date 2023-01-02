@@ -109,7 +109,7 @@ public class Recruit implements Serializable {
     private String timeEnd;
 
     /**
-     * 招聘状态(0结束 还剩下几个名额)
+     * 招聘状态(当等于num时招聘结束)
      */
     private Integer status;
 

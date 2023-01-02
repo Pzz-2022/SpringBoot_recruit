@@ -96,4 +96,7 @@ public class JsonResult {
     public static JsonResult judge(Boolean flag) {
         return flag ? ok() : error();
     }
+    public static JsonResult judge(String name, Object data) {
+        return data != null ? ok(name, data) : error();
+    }
 }

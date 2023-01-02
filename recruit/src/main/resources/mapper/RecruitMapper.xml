@@ -35,9 +35,11 @@
             AND education = #{education}
         </if>
           AND (
-                (salary_start &lt;= #{salaryStart} AND salary_end > #{salaryEnd})
+                (salary_start &lt;= #{salaryStart} AND salary_end >= #{salaryEnd})
                 OR (salary_end >= #{salaryStart} AND salary_end &lt; #{salaryEnd})
                )
+        AND num > status
+        AND is_deleted = 0
         LIMIT #{index}, #{pageSize};
     </select>
 
@@ -55,10 +57,12 @@
           AND (
                 (salary_start &lt;= #{salaryStart} AND salary_end > #{salaryEnd})
                 OR (salary_end >= #{salaryStart} AND salary_end &lt; #{salaryEnd})
-            );
+            )
+        AND num > status
+        AND is_deleted = 0;
     </select>
 
     <select id="selectAll" resultType="com.pzz.pojo.Recruit">
-        SELECT * FROM recruit;
+        SELECT * FROM recruit WHERE is_deleted = 0 AND num > status;
     </select>
 </mapper>

@@ -1,22 +1,27 @@
 package com.pzz.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import java.time.LocalDateTime;
+import java.io.Serializable;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.io.Serializable;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author 彭政
- * @since 2022-12-02
+ * @since 2022-12-29
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
+@NoArgsConstructor
 public class RecruitUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +43,11 @@ public class RecruitUser implements Serializable {
     private Integer recruitId;
 
     /**
+     * 简历的ID
+     */
+    private Integer resumeId;
+
+    /**
      * 申请时间
      */
     private String time;
@@ -52,5 +62,15 @@ public class RecruitUser implements Serializable {
      */
     private Integer status;
 
+    @TableField(exist = false)
+    private User user;
+    @TableField(exist = false)
+    private Recruit recruit;
+    @TableField(exist = false)
+    private Resume resume;
 
+    public RecruitUser(Integer pkId, Integer status) {
+        this.pkId = pkId;
+        this.status = status;
+    }
 }

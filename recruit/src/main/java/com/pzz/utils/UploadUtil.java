@@ -51,10 +51,11 @@ public class UploadUtil {
     }
 
     // 上传在本地的仓库
-    public static String uploadImg(MultipartFile file) throws Exception {
-        //图片校验（图片是否为空,图片大小，上传的是不是图片、图片类型（例如只能上传png）等等）
+    public static String upload(MultipartFile file) throws Exception {
+        // 图片校验（图片是否为空,图片大小，上传的是不是图片、图片类型（例如只能上传png）等等）
+        // 非空校验
         if (file.isEmpty()) {
-            return "图片上传失败";
+            return "上传失败";
         }
         //获取原来的文件名和后缀
         String originalFilename = file.getOriginalFilename();

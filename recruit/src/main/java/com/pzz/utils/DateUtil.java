@@ -4,7 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
-    private static final long YEAR_TIME = 1000L * 60 * 60 * 24 * 365;
+    private static final long MIN_TIME = 1000L * 60;
+    private static final long HOUR_TIME = MIN_TIME * 60;
+    private static final long DAY_TIME = HOUR_TIME * 24;
+    private static final long YEAR_TIME = DAY_TIME * 365;
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT1 = new SimpleDateFormat("yyyy-MM-dd");
     private static final SimpleDateFormat SIMPLE_DATE_FORMAT2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -28,6 +31,10 @@ public class DateUtil {
 
     public static String getDate1(){
         return SIMPLE_DATE_FORMAT1.format(new Date());
+    }
+
+    public static String getDate1(int dayCount){
+        return SIMPLE_DATE_FORMAT1.format(new Date().getTime() + dayCount * DAY_TIME);
     }
 
     public static String getDate2(){
