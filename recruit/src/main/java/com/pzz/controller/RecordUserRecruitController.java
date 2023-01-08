@@ -1,18 +1,13 @@
 package com.pzz.controller;
 
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.pzz.pojo.RecordUserRecruit;
-import com.pzz.pojo.Recruit;
+import com.alibaba.fastjson.JSONObject;
 import com.pzz.service.IRecordUserRecruitService;
 import com.pzz.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -29,11 +24,17 @@ public class RecordUserRecruitController {
     private IRecordUserRecruitService recordUserRecruitService;
 
     @GetMapping("/{uid}")
-    public JsonResult getRecordByUid(@PathVariable Long uid) {
-        Page<RecordUserRecruit> recordUserRecruitPage = recordUserRecruitService.selectRecordByUid(uid);
+    public JsonResult getRecordByUid(HttpServletRequest request, @PathVariable Long uid) {
+//        Page<RecordUserRecruit> recordUserRecruitPage = recordUserRecruitService.selectRecordByUid(request, uid);
+        JSONObject recordUserRecruitPage = recordUserRecruitService.selectJSONRecordByUid(request, uid);
 
         return JsonResult.ok("recordUserRecruitPage", recordUserRecruitPage);
     }
 
+    @PatchMapping
+    public JsonResult updateRecord(HttpServletRequest request) {
+        recordUserRecruitService.updateRecord(request);
+        return JsonResult.ok();
+    }
 }
 

@@ -9,7 +9,10 @@ import com.pzz.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -27,8 +30,9 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
+
     @PostMapping("/login")
-    public JsonResult applyLogin(@RequestBody Map<String, User> para) throws JsonProcessingException {
+    public JsonResult applyLogin(HttpServletRequest request, @RequestBody Map<String, User> para) throws JsonProcessingException {
         User user = para.get("data");
         System.out.println(user);
 
@@ -42,6 +46,9 @@ public class UserController {
 
             HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("token", tokenStr);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("token", tokenStr);
 
             return JsonResult.ok(hashMap);
         } else
@@ -92,6 +99,10 @@ public class UserController {
         return JsonResult.ok("user", user);
     }
 
-
+    @GetMapping("/getOne/{uid}")
+    public JsonResult getOne(@PathVariable Integer uid) {
+        User user = userService.getById(uid);
+        return JsonResult.ok("user", user);
+    }
 }
 

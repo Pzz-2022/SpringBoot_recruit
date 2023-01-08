@@ -40,6 +40,11 @@ public class Question implements Serializable {
     private Integer type;
 
     /**
+     * 分值
+     */
+    private Integer score;
+
+    /**
      * 题目的描述
      */
     private String content;

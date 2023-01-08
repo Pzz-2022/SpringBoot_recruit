@@ -11,7 +11,7 @@
     </select>
 
     <select id="selectByHrId" resultType="com.pzz.pojo.RecruitUser">
-        SELECT * FROM recruit_user WHERE status!=0 AND recruit_id in (SELECT pk_id FROM recruit WHERE recruit.user_id = #{hrId}) LIMIT #{pageBegin}, #{pageSize};
+        SELECT * FROM recruit_user WHERE status!=0 AND status!=4 AND recruit_id in (SELECT pk_id FROM recruit WHERE recruit.user_id = #{hrId}) LIMIT #{pageBegin}, #{pageSize};
     </select>
 
     <select id="selectByHrIdTotal" resultType="java.lang.Integer">

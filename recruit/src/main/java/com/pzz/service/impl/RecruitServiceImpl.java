@@ -4,10 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.mapper.RecruitMapper;
 import com.pzz.pojo.Recruit;
+import com.pzz.pojo.RecruitUser;
 import com.pzz.service.IRecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.pzz.service.IRecruitUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -19,6 +23,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> implements IRecruitService {
+    @Autowired
+    private IRecruitUserService recruitUserService;
+
     @Autowired
     private RecruitMapper recruitMapper;
 

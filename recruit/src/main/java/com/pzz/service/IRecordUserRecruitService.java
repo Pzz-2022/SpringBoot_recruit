@@ -1,8 +1,11 @@
 package com.pzz.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.pzz.pojo.RecordUserRecruit;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
@@ -14,5 +17,9 @@ import com.pzz.pojo.RecordUserRecruit;
  */
 public interface IRecordUserRecruitService extends IService<RecordUserRecruit> {
 
-    Page<RecordUserRecruit> selectRecordByUid(Long uid);
+    Page<RecordUserRecruit> selectRecordByUid(HttpServletRequest request, Long uid);
+
+    JSONObject selectJSONRecordByUid(HttpServletRequest request, Long uid);
+
+    void updateRecord(HttpServletRequest request);
 }

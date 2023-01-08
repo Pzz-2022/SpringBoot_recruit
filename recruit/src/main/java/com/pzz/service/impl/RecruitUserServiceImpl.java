@@ -1,7 +1,6 @@
 package com.pzz.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.pzz.pojo.Recruit;
 import com.pzz.pojo.RecruitUser;
 import com.pzz.mapper.RecruitUserMapper;
 import com.pzz.service.IRecruitService;
@@ -79,5 +78,18 @@ public class RecruitUserServiceImpl extends ServiceImpl<RecruitUserMapper, Recru
     @Override
     public Integer selectByHrIdTotal(Integer hrId) {
         return recruitUserMapper.selectByHrIdTotal(hrId);
+    }
+
+    @Override
+    public List<RecruitUser> selectAllByUid(Integer uid) {
+        LambdaQueryWrapper<RecruitUser> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(RecruitUser::getUserId, uid);
+
+        List<RecruitUser> recruitUserList = recruitUserMapper.selectList(lqw);
+        for (RecruitUser recruitUser : recruitUserList) {
+            recruitUser.setRecruit(recruitService.getById(recruitUser.getRecruitId()));
+        }
+
+        return recruitUserList;
     }
 }

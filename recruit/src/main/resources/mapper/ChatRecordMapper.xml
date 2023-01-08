@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pzz.mapper.ChatRecordMapper">
+
+    <select id="selectRecord" resultType="com.pzz.pojo.ChatRecord">
+        SELECT * FROM chat_record WHERE (from_uid = #{uid1} AND to_uid = #{uid2}) OR (from_uid = #{uid2} AND to_uid = #{uid1});
+    </select>
+    <select id="getUidList" resultType="com.pzz.pojo.ChatRecord">
+        SELECT DISTINCT from_uid, to_uid FROM chat_record WHERE from_uid = #{uid} OR to_uid = #{uid};
+    </select>
+</mapper>

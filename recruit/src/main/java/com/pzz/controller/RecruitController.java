@@ -1,5 +1,7 @@
 package com.pzz.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.pojo.RecordUserRecruit;
 import com.pzz.pojo.Recruit;
@@ -7,6 +9,7 @@ import com.pzz.service.IRecordUserRecruitService;
 import com.pzz.service.IRecruitService;
 import com.pzz.utils.JsonResult;
 import com.pzz.utils.JwtUtil;
+import com.pzz.utils.LRUCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,7 +77,21 @@ public class RecruitController {
                     throw new Exception("该用户未登录。");
                 }
                 Integer uid = JwtUtil.parseTokenToGetUid(token);
-                recordUserRecruitService.save(new RecordUserRecruit(uid, recruit.getPkId()));
+                System.out.print("uid:");
+                System.out.println(uid);
+                if (request.getSession().getAttribute("lruCache") == null) {
+                    System.out.println(1);
+                    recordUserRecruitService.selectJSONRecordByUid(request, Long.valueOf(uid));
+                }
+                RecordUserRecruit recordUserRecruit = new RecordUserRecruit(uid, pkId);
+
+//                recordUserRecruitService.save(recordUserRecruit);
+                LRUCache<Integer, RecordUserRecruit> lruCache = (LRUCache<Integer, RecordUserRecruit>) request.getSession().getAttribute("lruCache");
+
+                System.out.println(lruCache);
+                lruCache.put(pkId, new RecordUserRecruit(uid, pkId));
+                System.out.println(lruCache);
+                request.getSession().setAttribute("lruCache", lruCache);
             } catch (Exception e) {
                 System.out.println("该用户未登录。");
             }

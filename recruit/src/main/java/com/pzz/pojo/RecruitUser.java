@@ -53,7 +53,12 @@ public class RecruitUser implements Serializable {
     private String time;
 
     /**
-     * 招聘人给的评分的平均分
+     * 笔试题目
+     */
+    private Integer bid;
+
+    /**
+     * 笔试的评分
      */
     private Double avgScore;
 
@@ -69,6 +74,9 @@ public class RecruitUser implements Serializable {
     @TableField(exist = false)
     private Resume resume;
 
+    public RecruitUser(Integer pkId) {
+        this.pkId = pkId;
+    }
     public RecruitUser(Integer pkId, Integer status) {
         this.pkId = pkId;
         this.status = status;
