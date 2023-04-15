@@ -2,9 +2,11 @@ package com.pzz.controller;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.pojo.RecordUserRecruit;
 import com.pzz.pojo.Recruit;
+import com.pzz.service.IHrInfoService;
 import com.pzz.service.IRecordUserRecruitService;
 import com.pzz.service.IRecruitService;
 import com.pzz.utils.JsonResult;
@@ -14,6 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -32,6 +36,9 @@ public class RecruitController {
 
     @Autowired
     private IRecordUserRecruitService recordUserRecruitService;
+
+    @Autowired
+    private IHrInfoService hrInfoService;
 
     @GetMapping
     public JsonResult getAll() {
@@ -151,6 +158,16 @@ public class RecruitController {
         boolean b = recruitService.updateById(recruit);
 
         return JsonResult.judge(b);
+    }
+
+    @PatchMapping("/updateStatus/{rid}")
+    private JsonResult updateStatus(@PathVariable int rid) {
+        Recruit recruit = recruitService.getById(rid);
+
+        recruit.setStatus(recruit.getStatus()+1);
+        recruitService.updateById(recruit);
+
+        return JsonResult.ok();
     }
 }
 

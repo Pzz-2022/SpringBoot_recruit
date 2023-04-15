@@ -59,6 +59,7 @@ public class UploadImgController {
 
     @PostMapping("/image")
     public JsonResult upload(MultipartFile file) {
+        System.out.println("image...");
         try {
             return JsonResult.ok("url", UploadUtil.upload(file));
         } catch (Exception e) {

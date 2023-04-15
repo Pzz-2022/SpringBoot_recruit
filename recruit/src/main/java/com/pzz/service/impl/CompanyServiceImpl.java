@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 彭政
@@ -34,10 +34,14 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     public Page<Company> getSearchPage(int page, int pageSize, String q, String address, String count, String type) {
         Page<Company> rowPage = new Page<>(page, pageSize);
         LambdaQueryWrapper<Company> lqw = new LambdaQueryWrapper<>();
-        lqw.like(Company::getName, q)
-                .like(Company::getAddress, address)
-                .like(Company::getCount, count)
-                .like(Company::getType, type);
+        if (!q.equals(""))
+            lqw.like(Company::getName, q);
+        if (!address.equals(""))
+            lqw.like(Company::getAddress, address);
+        if (!count.equals(""))
+            lqw.like(Company::getCount, count);
+        if (!type.equals(""))
+            lqw.like(Company::getType, type);
 
         return baseMapper.selectPage(rowPage, lqw);
     }

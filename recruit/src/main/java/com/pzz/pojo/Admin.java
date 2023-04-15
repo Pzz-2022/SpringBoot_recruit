@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -13,39 +14,41 @@ import java.io.Serializable;
  * </p>
  *
  * @author 彭政
- * @since 2022-12-02
+ * @since 2023-01-10
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class RecruitUserScore implements Serializable {
+public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 唯一标识ID
+     * 唯一标识
      */
-    @TableId(value = "pk_id", type = IdType.ASSIGN_ID)
-    private Integer pkId;
+    @TableId(value = "admin_id", type = IdType.AUTO)
+    private Integer adminId;
 
     /**
-     * 对应的申请招聘的ID
+     * 管理员账号
      */
-    private Integer recruitUserId;
+    private Integer account;
 
     /**
-     * 招聘人ID
+     * 密码
      */
-    private Integer userId;
+    private String password;
 
     /**
-     * 招聘人给的评分
+     * 名称
      */
-    private Integer score;
+    private String name;
+
+    private Integer power;
 
     /**
-     * 招聘人给的评价
+     * 创建时间
      */
-    private String description;
+    private String createTime;
 
 
 }

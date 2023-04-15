@@ -43,7 +43,7 @@ public class QuestionController {
 
     @GetMapping("/company/{cid}")
     private JsonResult getByCid(@PathVariable Integer cid) {
-        List<Question> questionList = questionService.getByCid(cid);
+        List<Question> questionList = questionService.getAdminByCid(cid);
 
         return JsonResult.judge("questionList", questionList);
     }
@@ -58,6 +58,17 @@ public class QuestionController {
     @DeleteMapping("/{qid}")
     private JsonResult deleteOne(@PathVariable Integer qid) {
         boolean b = questionService.removeById(qid);
+
+        return JsonResult.judge(b);
+    }
+
+    @PatchMapping("/updateStatus/{qid}")
+    private JsonResult updateStatus(@PathVariable Integer qid, Integer status) {
+        Question question = new Question();
+        question.setQid(qid);
+        question.setStatus(status);
+
+        boolean b = questionService.updateById(question);
 
         return JsonResult.judge(b);
     }

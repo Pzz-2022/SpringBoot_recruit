@@ -64,5 +64,12 @@ public class CompanyController {
         else
             return JsonResult.error("查询SearchPage失败!");
     }
+
+    @DeleteMapping("/{cid}")
+    public JsonResult deleteOne(@PathVariable Integer cid) {
+        boolean b = companyService.removeById(cid);
+
+        return JsonResult.judge(b);
+    }
 }
 

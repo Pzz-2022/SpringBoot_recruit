@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author 彭政
@@ -92,17 +92,19 @@ public class RecordUserRecruitServiceImpl extends ServiceImpl<RecordUserRecruitM
     public void updateRecord(HttpServletRequest request) {
         LRUCache<Integer, RecordUserRecruit> lruCache = (LRUCache<Integer, RecordUserRecruit>) request.getSession().getAttribute("lruCache");
 
+        // 如果没有访问记录 则推出
+        if (lruCache.size < 1)
+            return;
+
         Entry<Integer, RecordUserRecruit> head = lruCache.head;
+        LambdaQueryWrapper<RecordUserRecruit> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(RecordUserRecruit::getUid, head.next.value.getUid());
+        this.remove(lqw);
+
         for (int i = 0; i < lruCache.size; i++) {
             head = head.next;
 
-            LambdaQueryWrapper<RecordUserRecruit> lqw = new LambdaQueryWrapper<>();
-            lqw.eq(RecordUserRecruit::getUid, head.value.getUid());
-            lqw.eq(RecordUserRecruit::getRecruitId, head.key);
-            this.remove(lqw);
-
             this.save(head.value);
-            System.out.println(head.value);
         }
     }
 }

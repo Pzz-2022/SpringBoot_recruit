@@ -1,6 +1,7 @@
 package com.pzz.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.pzz.pojo.User;
 import com.pzz.service.IUserService;
@@ -11,8 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -44,13 +43,10 @@ public class UserController {
         if (resultUser.getPassword().equals(user.getPassword())) {
             String tokenStr = JwtUtil.createToken(resultUser.getUid(), resultUser.getName());
 
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("token", tokenStr);
-
             HttpSession session = request.getSession();
             session.setAttribute("token", tokenStr);
 
-            return JsonResult.ok(hashMap);
+            return JsonResult.ok("token", tokenStr);
         } else
             return JsonResult.error();
     }
@@ -103,6 +99,22 @@ public class UserController {
     public JsonResult getOne(@PathVariable Integer uid) {
         User user = userService.getById(uid);
         return JsonResult.ok("user", user);
+    }
+
+    @GetMapping("/list")
+    public JsonResult getList(int page, int pageSize) {
+        Page<User> rowPage = new Page<>(page, pageSize);
+
+        Page<User> userPage = userService.getBaseMapper().selectPage(rowPage, null);
+
+        return JsonResult.ok("userPage", userPage);
+    }
+
+    @DeleteMapping("/{uid}")
+    public JsonResult deleteOne(@PathVariable int uid) {
+        boolean b = userService.removeById(uid);
+
+        return JsonResult.judge(b);
     }
 }
 

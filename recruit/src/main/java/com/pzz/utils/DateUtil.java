@@ -29,14 +29,26 @@ public class DateUtil {
         }
     }
 
+    /**
+     * 返回现在的年月日 yyyy-MM-dd
+     * @ pp
+     */
     public static String getDate1(){
         return SIMPLE_DATE_FORMAT1.format(new Date());
     }
 
+    /**
+     * 返回现在加dayCount的年月日 yyyy-MM-dd
+     * @ pp
+     */
     public static String getDate1(int dayCount){
         return SIMPLE_DATE_FORMAT1.format(new Date().getTime() + dayCount * DAY_TIME);
     }
 
+    /**
+     * 返回现在的年月日时分秒 yyyy-MM-dd HH:mm:ss
+     * @ pp
+     */
     public static String getDate2(){
         return SIMPLE_DATE_FORMAT2.format(new Date());
     }

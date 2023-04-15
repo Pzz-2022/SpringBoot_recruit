@@ -13,4 +13,5 @@ import com.pzz.pojo.HrInfo;
  */
 public interface IHrInfoService extends IService<HrInfo> {
 
+    void updateByUid(Integer userId);
 }

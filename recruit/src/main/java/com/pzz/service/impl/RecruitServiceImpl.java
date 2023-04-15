@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.pzz.mapper.RecruitMapper;
 import com.pzz.pojo.Recruit;
-import com.pzz.pojo.RecruitUser;
 import com.pzz.service.IRecruitService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pzz.service.IRecruitUserService;
@@ -40,14 +39,31 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
     }
 
     @Override
-    public Page<Recruit> getPage(int uid, int pageNow, int pageSize) {
+    public Page<Recruit> getPage(int hrId, int pageNow, int pageSize) {
         // 分页、查询参数
         Page<Recruit> rowPage = new Page(pageNow, pageSize);
         LambdaQueryWrapper<Recruit> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(Recruit::getUserId, uid);
+        lqw.eq(Recruit::getUserId, hrId);
         lqw.apply("num > status");
 
         return baseMapper.selectPage(rowPage, lqw);
+    }
+
+    @Override
+    public List<Recruit> getPage(int hrId) {
+        LambdaQueryWrapper<Recruit> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Recruit::getUserId, hrId);
+
+        return baseMapper.selectList(lqw);
+    }
+
+    // 查看HR发布过多少次职位
+    @Override
+    public int getPagePlus(Integer hrId) {
+        LambdaQueryWrapper<Recruit> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Recruit::getUserId, hrId);
+
+        return baseMapper.selectCount(lqw);
     }
 
     @Override
@@ -74,6 +90,7 @@ public class RecruitServiceImpl extends ServiceImpl<RecruitMapper, Recruit> impl
 
         return recruitPage;
     }
+
 
 
 }

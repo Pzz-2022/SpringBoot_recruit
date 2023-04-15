@@ -26,6 +26,8 @@ public class HrInfoController {
 
     @GetMapping("/{hrId}")
     public JsonResult getHrInfo(@PathVariable Integer hrId) {
+        hrInfoService.updateByUid(hrId);
+
         LambdaQueryWrapper<HrInfo> lqw = new LambdaQueryWrapper<>();
         lqw.eq(HrInfo::getHrId, hrId);
 

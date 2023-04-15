@@ -18,5 +18,11 @@ public interface IQuestionService extends IService<Question> {
 
     List<Question> getByCid(int cid);
 
+    List<Question> getAdminByCid(int cid);
+
     List<Question> getByBid(Integer bid);
+
+    List<Question> getAdminByBid(Integer bid);
+
+    List<Question> getAdminAll(Integer status);
 }

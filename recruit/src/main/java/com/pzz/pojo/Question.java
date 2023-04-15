@@ -75,6 +75,11 @@ public class Question implements Serializable {
     private String answer;
 
     /**
+     * 状态 查看是否通过审核
+     */
+    private Integer status;
+
+    /**
      * 创建时间
      */
     private String createTime;

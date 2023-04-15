@@ -33,15 +33,35 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
     public int getCountByBid(Integer bid) {
         LambdaQueryWrapper<Question> lqw = new LambdaQueryWrapper<>();
         lqw.eq(Question::getBid, bid);
+        lqw.eq(Question::getStatus, 2);
 
-        List<Question> questionList = questionMapper.selectList(lqw);
-        return questionList.size();
+        return questionMapper.selectCount(lqw);
     }
 
     @Override
     public List<Question> getByBid(Integer bid) {
         LambdaQueryWrapper<Question> lqw = new LambdaQueryWrapper<>();
         lqw.eq(Question::getBid, bid);
+        lqw.eq(Question::getStatus, 2);
+
+        return questionMapper.selectList(lqw);
+    }
+
+    @Override
+    public List<Question> getAdminByBid(Integer bid) {
+        LambdaQueryWrapper<Question> lqw = new LambdaQueryWrapper<>();
+        lqw.eq(Question::getBid, bid);
+
+        return questionMapper.selectList(lqw);
+    }
+
+    @Override
+    public List<Question> getAdminAll(Integer status) {
+        LambdaQueryWrapper<Question> lqw = new LambdaQueryWrapper<>();
+        lqw.orderByDesc(Question::getStatus);
+
+        if (status == 0 || status == 1 || status == 2)
+            lqw.eq(Question::getStatus, status);
 
         return questionMapper.selectList(lqw);
     }
@@ -53,6 +73,20 @@ public class QuestionServiceImpl extends ServiceImpl<QuestionMapper, Question> i
 
         for (QuestionBank questionBank : questionBankList) {
             List<Question> list = getByBid(questionBank.getBid());
+
+            questionList.addAll(list);
+        }
+
+        return questionList;
+    }
+
+    @Override
+    public List<Question> getAdminByCid(int cid) {
+        List<Question> questionList = new ArrayList<>();
+        List<QuestionBank> questionBankList = questionBankService.getByCid(cid);
+
+        for (QuestionBank questionBank : questionBankList) {
+            List<Question> list = getAdminByBid(questionBank.getBid());
 
             questionList.addAll(list);
         }
