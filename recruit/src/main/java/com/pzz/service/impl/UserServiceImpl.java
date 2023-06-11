@@ -6,6 +6,7 @@ import com.pzz.pojo.User;
 import com.pzz.service.IUserService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.pzz.utils.DateUtil;
+import com.pzz.utils.JwtUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -28,6 +29,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             user.setBirthday(birthday.substring(0, 10));
         if (user.getHeadPortrait() == null || user.getHeadPortrait().equals(""))
             user.setHeadPortrait("https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png");
+
+        System.out.println("user.getPassword() = " + user.getPassword());
 
         this.saveOrUpdate(user);
 

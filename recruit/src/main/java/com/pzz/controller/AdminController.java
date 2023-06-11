@@ -64,6 +64,8 @@ public class AdminController {
     public JsonResult companyChange(@PathVariable Integer day) {
         List<Number> nums = adminService.companyChange(day);
 
+        System.out.println("nums = " + nums);
+
         return JsonResult.ok("nums", nums);
     }
 

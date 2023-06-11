@@ -110,6 +110,13 @@ public class UserController {
         return JsonResult.ok("userPage", userPage);
     }
 
+    @PostMapping("/update/modify_personal_info")
+    public JsonResult updateCandidate(@RequestBody User user) {
+        System.out.println(user);
+        return userService.updateById(user) ? JsonResult.ok() : JsonResult.error();
+    }
+
+
     @DeleteMapping("/{uid}")
     public JsonResult deleteOne(@PathVariable int uid) {
         boolean b = userService.removeById(uid);

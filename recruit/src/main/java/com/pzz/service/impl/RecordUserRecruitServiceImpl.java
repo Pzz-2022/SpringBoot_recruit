@@ -93,7 +93,7 @@ public class RecordUserRecruitServiceImpl extends ServiceImpl<RecordUserRecruitM
         LRUCache<Integer, RecordUserRecruit> lruCache = (LRUCache<Integer, RecordUserRecruit>) request.getSession().getAttribute("lruCache");
 
         // 如果没有访问记录 则推出
-        if (lruCache.size < 1)
+        if (lruCache == null || lruCache.size < 1)
             return;
 
         Entry<Integer, RecordUserRecruit> head = lruCache.head;

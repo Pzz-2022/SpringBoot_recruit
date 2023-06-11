@@ -2,6 +2,7 @@ package com.pzz.utils;
 
 import io.jsonwebtoken.*;
 
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.UUID;
 
@@ -54,4 +55,26 @@ public class JwtUtil {
         return uid;
     }
 
+    // MD5
+    public static String getMD5(String str) throws Exception {
+
+        StringBuilder MD5 = new StringBuilder();
+
+        MessageDigest md5 = MessageDigest.getInstance("MD5");
+        byte[] bytes = str.getBytes();
+        byte[] digest = md5.digest(bytes);
+
+        for (int b : digest) {
+            //摘要字节数组中各个字节的"十六进制"形式.
+            int j = b;
+            j = j & 0x000000ff;
+            String s1 = Integer.toHexString(j);
+
+            if (s1.length() == 1) {
+                s1 = "0" + s1;
+            }
+            MD5.append(s1);
+        }
+        return MD5.toString();
+    }
 }

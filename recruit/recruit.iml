@@ -152,5 +152,6 @@
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter-cache:2.5.0" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-context-support:5.3.7" level="project" />
+    <orderEntry type="library" name="Maven: org.jsoup:jsoup:1.14.3" level="project" />
   </component>
 </module>

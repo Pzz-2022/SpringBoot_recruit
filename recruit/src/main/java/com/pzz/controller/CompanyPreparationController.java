@@ -31,6 +31,7 @@ public class CompanyPreparationController {
     public JsonResult addOne(@RequestBody CompanyPreparation companyPreparation) {
         companyPreparation.setCreateTime(DateUtil.getDate2());
 
+        System.out.println("companyPreparation = " + companyPreparation);
         boolean save = companyPreparationService.save(companyPreparation);
 
         return save ? JsonResult.ok("companyPreparation", companyPreparation) : JsonResult.error();

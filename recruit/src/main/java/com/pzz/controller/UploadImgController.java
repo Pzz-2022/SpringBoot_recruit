@@ -53,6 +53,7 @@ public class UploadImgController {
             return JsonResult.ok("url", url);
         } catch (Exception e) {
             System.out.println("用户未登录或token超时.");
+            e.printStackTrace();
             return JsonResult.error("用户未登录或token超时.");
         }
     }
@@ -83,6 +84,23 @@ public class UploadImgController {
         try {
             String url = UploadUtil.upload(file);
             Long uid = Long.valueOf(JwtUtil.parseTokenToGetUid(request.getHeader("token")));
+            User user = new User();
+            user.setUid(uid);
+            user.setHeadPortrait(url);
+            userService.updateById(user);
+
+            return JsonResult.ok("url", url);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return JsonResult.error();
+        }
+    }
+
+    @PostMapping("/head/{hrId}")
+    public JsonResult uploadHeadById(HttpServletRequest request, MultipartFile file, @PathVariable long hrId) {
+        try {
+            String url = UploadUtil.upload(file);
+            Long uid = hrId;
             User user = new User();
             user.setUid(uid);
             user.setHeadPortrait(url);
